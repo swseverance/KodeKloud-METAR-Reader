@@ -45,6 +45,10 @@ app.get('/api/metar', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`METAR Reader running at http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`METAR Reader running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
