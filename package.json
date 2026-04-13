@@ -5,12 +5,17 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "express": "^4.19.2"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0"
   }
 }
