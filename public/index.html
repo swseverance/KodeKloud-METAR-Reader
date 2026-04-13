@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>METAR Reader</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>METAR Reader</h1>
+      <p class="tagline">Type an airport code to get a plain-English weather report.</p>
+    </header>
+
+    <form id="search-form" autocomplete="off">
+      <div class="input-row">
+        <input
+          id="airport-input"
+          type="text"
+          placeholder="e.g. KHIO, KJFK, EGLL"
+          maxlength="4"
+          spellcheck="false"
+          aria-label="Airport ICAO code"
+        />
+        <button type="submit">Get Weather</button>
+      </div>
+    </form>
+
+    <div id="error-banner" class="error-banner hidden" role="alert"></div>
+
+    <section id="result" class="hidden" aria-live="polite">
+      <!-- Station & time -->
+      <div class="station-row">
+        <span id="station-code" class="station-code"></span>
+        <span id="report-time" class="report-time"></span>
+        <span id="flight-badge" class="flight-badge"></span>
+      </div>
+
+      <!-- Plain-English summary -->
+      <div id="summary" class="summary"></div>
+
+      <!-- Detail cards -->
+      <div class="cards">
+        <div class="card" id="card-temp">
+          <div class="card-label">Temperature</div>
+          <div class="card-value" id="val-temp"></div>
+          <div class="card-sub" id="val-dew"></div>
+        </div>
+
+        <div class="card" id="card-wind">
+          <div class="card-label">Wind</div>
+          <div class="card-value" id="val-wind"></div>
+          <div class="card-sub" id="val-gust"></div>
+        </div>
+
+        <div class="card" id="card-vis">
+          <div class="card-label">Visibility</div>
+          <div class="card-value" id="val-vis"></div>
+        </div>
+
+        <div class="card" id="card-sky">
+          <div class="card-label">Sky Conditions</div>
+          <div id="val-sky"></div>
+        </div>
+
+        <div class="card" id="card-pressure">
+          <div class="card-label">Altimeter</div>
+          <div class="card-value" id="val-pressure"></div>
+        </div>
+
+        <div class="card" id="card-wx">
+          <div class="card-label">Weather</div>
+          <div id="val-wx"></div>
+        </div>
+      </div>
+
+      <!-- Raw METAR -->
+      <details class="raw-section">
+        <summary>Raw METAR</summary>
+        <pre id="raw-metar"></pre>
+      </details>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

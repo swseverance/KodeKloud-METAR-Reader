@@ -1,0 +1,219 @@
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f0f4f8;
+  --surface:   #ffffff;
+  --border:    #dde3ea;
+  --text:      #1a2332;
+  --muted:     #6b7a90;
+  --accent:    #2563eb;
+  --radius:    12px;
+
+  --vfr-bg:    #d1fae5; --vfr-text:  #065f46;
+  --mvfr-bg:   #dbeafe; --mvfr-text: #1e40af;
+  --ifr-bg:    #fee2e2; --ifr-text:  #991b1b;
+  --lifr-bg:   #ede9fe; --lifr-text: #5b21b6;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+header { text-align: center; margin-bottom: 2rem; }
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+.tagline { color: var(--muted); margin-top: 0.4rem; font-size: 1rem; }
+
+/* ── Search form ── */
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#airport-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  transition: border-color 0.15s;
+}
+#airport-input:focus { border-color: var(--accent); }
+
+button[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, opacity 0.15s;
+}
+button[type="submit"]:hover  { background: #1d4ed8; }
+button[type="submit"]:active { opacity: 0.85; }
+button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Error banner ── */
+.error-banner {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}
+.hidden { display: none !important; }
+
+/* ── Result section ── */
+#result { margin-top: 2rem; }
+
+.station-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.station-code {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.report-time {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ── Flight category badge ── */
+.flight-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.flight-badge.VFR  { background: var(--vfr-bg);  color: var(--vfr-text); }
+.flight-badge.MVFR { background: var(--mvfr-bg); color: var(--mvfr-text); }
+.flight-badge.IFR  { background: var(--ifr-bg);  color: var(--ifr-text); }
+.flight-badge.LIFR { background: var(--lifr-bg); color: var(--lifr-text); }
+
+/* ── Summary ── */
+.summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  line-height: 1.65;
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Detail cards ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.card-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+#card-sky .sky-layer,
+#card-wx  .wx-item {
+  font-size: 0.95rem;
+  padding: 0.15rem 0;
+  line-height: 1.4;
+}
+
+/* ── Raw METAR ── */
+.raw-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.raw-section summary {
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+}
+
+.raw-section pre {
+  margin-top: 0.6rem;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.9rem;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ── Loading spinner ── */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  .station-code { font-size: 1.5rem; }
+  .card-value { font-size: 1.2rem; }
+}
